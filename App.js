@@ -6,6 +6,7 @@ import { Icon } from 'react-native-elements';
 
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import SelectionScreen from './src/screens/SelectionScreen';
+import RecipeScreen from './src/screens/RecipeScreen';
 
 const Container = styled.View`
   flex: 1;
@@ -29,10 +30,10 @@ const App = () => {
 
   const ReportTab = TabNavigator(
     {
-      Selection: {
-        screen: SelectionScreen,
+      Recipe: {
+        screen: RecipeScreen,
         navigationOptions: {
-          tabBarLabel: 'Selection',
+          tabBarLabel: 'Recipe',
           tabBarIcon: ({ tintColor }) => <Icon name="list" size={25} color={tintColor} />,
         },
       },
