@@ -23,6 +23,10 @@ class SelectionScreen extends Component {
     console.log(this.state.items);
   };
 
+  onBtnPress = () => {
+    this.props.navigation.navigate('Recipe');
+  };
+
   handleScroll = () => {
     const { currentlyOpenSwipeable } = this.state;
 
@@ -71,6 +75,7 @@ class SelectionScreen extends Component {
             borderRadius={15}
             containerViewStyle={{ borderRadius: 15 }}
             backgroundColor="#3A3897"
+            onPress={this.onBtnPress}
           />
         </View>
       </View>
