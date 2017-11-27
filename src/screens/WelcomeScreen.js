@@ -41,7 +41,7 @@ const slides = [
   {
     key: 'somethun1',
     title: '',
-    text: 'Receive recipe suggestions based on unconsumed food products!',
+    text: 'Receive recipe suggestions based on available food products!',
     icon: 'ios-paper-outline',
     colors: ['#A3A1FF', '#3A3897'],
   },
