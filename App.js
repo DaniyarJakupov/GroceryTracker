@@ -29,34 +29,62 @@ const App = () => {
         headerLeft: null,
       },
     },
+    Recipe: {
+      screen: TabNavigator(
+        {
+          Recipe: {
+            screen: RecipeScreen,
+            navigationOptions: {
+              tabBarLabel: 'Recipes',
+              tabBarIcon: ({ tintColor }) => <Icon name="list" size={25} color={tintColor} />,
+            },
+          },
+        },
+        {
+          animationEnabled: Platform.OS === 'ios',
+          swipeEnabled: Platform.OS === 'ios',
+          // tabBarPosition: 'bottom',
+          tabBarOptions: {
+            activeTintColor: '#e91e63',
+            showLabel: true,
+            style: {
+              backgroundColor: '#4F00BC',
+            },
+            indicatorStyle: {
+              backgroundColor: '#e91e63',
+            },
+          },
+        },
+      ),
+    },
   });
 
-  const ReportTab = TabNavigator(
-    {
-      Recipe: {
-        screen: RecipeScreen,
-        navigationOptions: {
-          tabBarLabel: 'Recipe',
-          tabBarIcon: ({ tintColor }) => <Icon name="list" size={25} color={tintColor} />,
-        },
-      },
-    },
-    {
-      animationEnabled: Platform.OS === 'ios',
-      swipeEnabled: Platform.OS === 'ios',
-      // tabBarPosition: 'bottom',
-      tabBarOptions: {
-        activeTintColor: '#e91e63',
-        showLabel: true,
-        style: {
-          backgroundColor: '#4F00BC',
-        },
-        indicatorStyle: {
-          backgroundColor: '#e91e63',
-        },
-      },
-    },
-  );
+  // const ReportTab = TabNavigator(
+  //   {
+  //     Recipe: {
+  //       screen: RecipeScreen,
+  //       navigationOptions: {
+  //         tabBarLabel: 'Recipes',
+  //         tabBarIcon: ({ tintColor }) => <Icon name="list" size={25} color={tintColor} />,
+  //       },
+  //     },
+  //   },
+  //   {
+  //     animationEnabled: Platform.OS === 'ios',
+  //     swipeEnabled: Platform.OS === 'ios',
+  //     // tabBarPosition: 'bottom',
+  //     tabBarOptions: {
+  //       activeTintColor: '#e91e63',
+  //       showLabel: true,
+  //       style: {
+  //         backgroundColor: '#4F00BC',
+  //       },
+  //       indicatorStyle: {
+  //         backgroundColor: '#e91e63',
+  //       },
+  //     },
+  //   },
+  // );
 
   const Root = TabNavigator(
     {
@@ -65,9 +93,6 @@ const App = () => {
       },
       Input: {
         screen: InputTab,
-      },
-      Report: {
-        screen: ReportTab,
       },
     },
     {
