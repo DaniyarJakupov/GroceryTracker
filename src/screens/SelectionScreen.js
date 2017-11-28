@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
 import Swipeable from 'react-native-swipeable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Divider } from 'react-native-elements';
 import { Kaede } from 'react-native-textinput-effects';
 import { Button } from 'react-native-elements';
+
+import { fetchRecipes } from '../redux/actions';
 
 class SelectionScreen extends Component {
   state = {
@@ -17,14 +20,24 @@ class SelectionScreen extends Component {
     this.setState({ value: text });
   };
 
-  onSubmit = () => {
+  onInputEnter = () => {
     let newItem = { name: this.state.value };
-    this.setState((prevState, props) => ({ items: [newItem, ...prevState.items], value: '' }));
-    console.log(this.state.items);
+    this.setState(
+      (prevState, props) => ({ items: [newItem, ...prevState.items], value: '' }),
+      () => console.log(this.state.items),
+    );
   };
 
   onBtnPress = () => {
-    this.props.navigation.navigate('Recipe');
+    let itemsNames = this.state.items.map(item => item.name);
+    const query = itemsNames.join('+');
+    console.log(query);
+
+    this.props.fetchRecipes(query);
+
+    setTimeout(() => {
+      this.props.navigation.navigate('Recipe');
+    }, 2000);
   };
 
   handleScroll = () => {
@@ -60,7 +73,7 @@ class SelectionScreen extends Component {
               label="Enter a new item"
               value={this.state.value}
               onChangeText={this.onInputChange}
-              onSubmitEditing={this.onSubmit}
+              onSubmitEditing={this.onInputEnter}
             />
           </View>
 
@@ -160,4 +173,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectionScreen;
+export default connect(null, { fetchRecipes })(SelectionScreen);

@@ -19,17 +19,21 @@ import { Rating } from 'react-native-elements';
 import { fetchRecipes } from '../redux/actions';
 
 class RecipeScreen extends Component {
+  static navigationOptions = {
+    title: 'Recipes',
+  };
+
   state = {
     items: [],
     recipes: [],
   };
 
-  componentDidMount() {
-    this.props.fetchRecipes('chicken');
+  componentWillMount() {
+    this.setState((prevState, props) => ({ recipes: this.props.recipes }));
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState((prevState, props) => ({ recipes: nextProps.recipes }));
+    //this.setState((prevState, props) => ({ recipes: nextProps.recipes }));
     // setTimeout(() => {
     //   this.state.recipes.map(recipe => console.log(recipe));
     // }, 1000);
@@ -39,7 +43,6 @@ class RecipeScreen extends Component {
     if (this.state.recipes[0]) {
       return (
         <Container>
-          <Header />
           <Content>
             {this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id} />)}
           </Content>
@@ -51,7 +54,7 @@ class RecipeScreen extends Component {
 }
 
 function RecipeCard({ recipe }) {
-  console.log(recipe);
+  // console.log(recipe);
   d = Number(recipe.totalTimeInSeconds);
   const h = Math.floor(d / 3600);
   const m = Math.floor((d % 3600) / 60);
@@ -62,7 +65,11 @@ function RecipeCard({ recipe }) {
   const totalTime = hDisplay + mDisplay + sDisplay;
 
   const sImg = recipe.smallImageUrls[0];
-  const bigImg = sImg.replace(/s90/g, 's360');
+  const bigImg = sImg.replace(/s90/g, 's360').replace(/https/g, 'http');
+  const correctImg = bigImg.replace(/http/g, 'https');
+  // .replace(/https/g, 'http')
+  // .replace(/http/g, 'https');
+  console.log(correctImg);
 
   return (
     <Card style={{ flex: 0 }}>
@@ -79,7 +86,7 @@ function RecipeCard({ recipe }) {
           <Left>
             <Image
               source={{
-                uri: bigImg,
+                uri: correctImg,
               }}
               style={{ height: 200, width: 200, flex: 1 }}
             />
