@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
-
+import { StyleSheet, Image } from 'react-native';
+import { connect } from 'react-redux';
 import {
   Container,
   Header,
@@ -14,45 +14,96 @@ import {
   Left,
   Body,
 } from 'native-base';
+import { Rating } from 'react-native-elements';
+
+import { fetchRecipes } from '../redux/actions';
 
 class RecipeScreen extends Component {
   state = {
     items: [],
+    recipes: [],
   };
 
-  render() {
-    return (
-      <Container>
-        <Header />
-        <Content>
-          <Card style={{ flex: 0 }}>
-            <CardItem>
-              <Left>
-                <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>April 15, 2016</Text>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Image source={{ uri: 'Image URL' }} style={{ height: 200, width: 200, flex: 1 }} />
-                <Text>//Your text here</Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button transparent textStyle={{ color: '#87838B' }}>
-                  <Icon name="logo-github" />
-                  <Text>1,926 stars</Text>
-                </Button>
-              </Left>
-            </CardItem>
-          </Card>
-        </Content>
-      </Container>
-    );
+  componentDidMount() {
+    this.props.fetchRecipes('chicken');
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState((prevState, props) => ({ recipes: nextProps.recipes }));
+    // setTimeout(() => {
+    //   this.state.recipes.map(recipe => console.log(recipe));
+    // }, 1000);
+  }
+
+  render() {
+    if (this.state.recipes[0]) {
+      return (
+        <Container>
+          <Header />
+          <Content>
+            {this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id} />)}
+          </Content>
+        </Container>
+      );
+    }
+    return <Text>Loading</Text>;
+  }
+}
+
+function RecipeCard({ recipe }) {
+  console.log(recipe);
+  d = Number(recipe.totalTimeInSeconds);
+  const h = Math.floor(d / 3600);
+  const m = Math.floor((d % 3600) / 60);
+  const s = Math.floor((d % 3600) % 60);
+  const hDisplay = h > 0 ? h + (h == 1 ? ' hour ' : ' hours ') : '';
+  const mDisplay = m > 0 ? m + (m == 1 ? ' minute ' : ' minutes ') : '';
+  const sDisplay = s > 0 ? s + (s == 1 ? ' second ' : ' seconds') : '';
+  const totalTime = hDisplay + mDisplay + sDisplay;
+
+  const sImg = recipe.smallImageUrls[0];
+  const bigImg = sImg.replace(/s90/g, 's360');
+
+  return (
+    <Card style={{ flex: 0 }}>
+      <CardItem>
+        <Left>
+          <Body>
+            <Text>{recipe.recipeName}</Text>
+            <Text note>Preparation time: {totalTime} </Text>
+          </Body>
+        </Left>
+      </CardItem>
+      <CardItem>
+        <Body>
+          <Left>
+            <Image
+              source={{
+                uri: bigImg,
+              }}
+              style={{ height: 200, width: 200, flex: 1 }}
+            />
+            <Text>{recipe.attributes.course[0]}</Text>
+          </Left>
+        </Body>
+      </CardItem>
+      <CardItem>
+        <Left>
+          {/* <Button transparent textStyle={{ color: '#87838B' }}>
+            <Icon name="logo-github" />
+            <Text>1,926 stars</Text>
+          </Button> */}
+          <Rating
+            showRating
+            type="star"
+            fractions={1}
+            startingValue={recipe.rating}
+            imageSize={20}
+          />
+        </Left>
+      </CardItem>
+    </Card>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -62,4 +113,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecipeScreen;
+const mapStateToProps = state => {
+  return {
+    recipes: state.recipes,
+  };
+};
+
+export default connect(mapStateToProps, { fetchRecipes })(RecipeScreen);
