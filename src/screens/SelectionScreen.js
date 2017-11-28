@@ -16,10 +16,10 @@ class SelectionScreen extends Component {
     items: [],
   };
 
+  /* Text Input */
   onInputChange = text => {
     this.setState({ value: text });
   };
-
   onInputEnter = () => {
     let newItem = { name: this.state.value };
     this.setState(
@@ -27,7 +27,8 @@ class SelectionScreen extends Component {
       () => console.log(this.state.items),
     );
   };
-
+  /* ================================================================================= */
+  /* Done Button */
   onBtnPress = () => {
     let itemsNames = this.state.items.map(item => item.name);
     const query = itemsNames.join('+');
@@ -39,7 +40,16 @@ class SelectionScreen extends Component {
       this.props.navigation.navigate('Recipe');
     }, 2000);
   };
-
+  /* ================================================================================= */
+  /* Item Close Button */
+  onItemRemove = selectedItem => {
+    const newItemsArray = this.state.items.filter(item => item.name !== selectedItem.name);
+    this.setState((prevState, props) => ({
+      items: newItemsArray,
+    }));
+    console.log(newItemsArray);
+  };
+  /* ================================================================================= */
   handleScroll = () => {
     const { currentlyOpenSwipeable } = this.state;
 
@@ -47,6 +57,7 @@ class SelectionScreen extends Component {
       currentlyOpenSwipeable.recenter();
     }
   };
+  /* ================================================================================= */
 
   render() {
     const { currentlyOpenSwipeable } = this.state;
@@ -77,7 +88,48 @@ class SelectionScreen extends Component {
             />
           </View>
 
-          {this.state.items.map(item => <Item1 {...itemProps} key={item.name} item={item} />)}
+          {this.state.items.map(item => (
+            <View style={styles.wrapper} key={item.name}>
+              <Swipeable
+                rightButtons={[
+                  <TouchableOpacity
+                    style={[styles.rightSwipeItem, { backgroundColor: 'lightseagreen' }]}
+                  >
+                    <Ionicons
+                      style={{ backgroundColor: 'transparent' }}
+                      name="ios-checkmark-circle-outline"
+                      size={35}
+                      color="white"
+                    />
+                  </TouchableOpacity>,
+                  <TouchableOpacity
+                    style={[styles.rightSwipeItem, { backgroundColor: 'orchid' }]}
+                    onPress={() =>
+                      this.setState(
+                        {
+                          items: this.state.items.filter(arrItem => arrItem.name !== item.name),
+                        },
+                        () => console.log(this.state.items),
+                      )
+                    }
+                  >
+                    <Ionicons
+                      style={{ backgroundColor: 'transparent' }}
+                      name="ios-close-circle-outline"
+                      size={35}
+                      color="white"
+                    />
+                  </TouchableOpacity>,
+                ]}
+                onRightButtonsOpenRelease={itemProps.onOpen}
+                onRightButtonsCloseRelease={itemProps.onClose}
+              >
+                <View style={[styles.listItem]}>
+                  <Text>{item.name}</Text>
+                </View>
+              </Swipeable>
+            </View>
+          ))}
         </ScrollView>
 
         <View style={styles.btnWrapper}>
@@ -96,38 +148,43 @@ class SelectionScreen extends Component {
   }
 }
 
-function Item1({ onOpen, onClose, item }) {
-  return (
-    <View style={styles.wrapper}>
-      <Swipeable
-        rightButtons={[
-          <TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: 'lightseagreen' }]}>
-            <Ionicons
-              style={{ backgroundColor: 'transparent' }}
-              name="ios-checkmark-circle-outline"
-              size={35}
-              color="white"
-            />
-          </TouchableOpacity>,
-          <TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: 'orchid' }]}>
-            <Ionicons
-              style={{ backgroundColor: 'transparent' }}
-              name="ios-close-circle-outline"
-              size={35}
-              color="white"
-            />
-          </TouchableOpacity>,
-        ]}
-        onRightButtonsOpenRelease={onOpen}
-        onRightButtonsCloseRelease={onClose}
-      >
-        <View style={[styles.listItem]}>
-          <Text>{item.name}</Text>
-        </View>
-      </Swipeable>
-    </View>
-  );
-}
+// function Item({ onOpen, onClose, item, onItemRemove }) {
+//   return (
+//     <View style={styles.wrapper}>
+//       <Swipeable
+//         rightButtons={[
+//           <TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: 'lightseagreen' }]}>
+//             <Ionicons
+//               style={{ backgroundColor: 'transparent' }}
+//               name="ios-checkmark-circle-outline"
+//               size={35}
+//               color="white"
+//             />
+//           </TouchableOpacity>,
+//           <TouchableOpacity
+//             style={[styles.rightSwipeItem, { backgroundColor: 'orchid' }]}
+//             onPress={onItemRemove}
+//           >
+//             <Ionicons
+//               style={{ backgroundColor: 'transparent' }}
+//               name="ios-close-circle-outline"
+//               size={35}
+//               color="white"
+//             />
+//           </TouchableOpacity>,
+//         ]}
+//         onRightButtonsOpenRelease={onOpen}
+//         onRightButtonsCloseRelease={onClose}
+//       >
+//         <View style={[styles.listItem]}>
+//           <Text>{item.name}</Text>
+//         </View>
+//       </Swipeable>
+//     </View>
+//   );
+// }
+
+// <Item {...itemProps} key={item.name} item={item} onItemRemove={this.onItemRemove} />
 
 const styles = StyleSheet.create({
   container: {
