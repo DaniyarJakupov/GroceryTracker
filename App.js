@@ -4,6 +4,9 @@ import styled from 'styled-components/native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import SelectionScreen from './src/screens/SelectionScreen';
 import RecipeScreen from './src/screens/RecipeScreen';
@@ -83,9 +86,11 @@ const App = () => {
   );
 
   return (
-    <Container>
-      <Root />
-    </Container>
+    <Provider store={store}>
+      <Container>
+        <Root />
+      </Container>
+    </Provider>
   );
 };
 
