@@ -148,44 +148,6 @@ class SelectionScreen extends Component {
   }
 }
 
-// function Item({ onOpen, onClose, item, onItemRemove }) {
-//   return (
-//     <View style={styles.wrapper}>
-//       <Swipeable
-//         rightButtons={[
-//           <TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: 'lightseagreen' }]}>
-//             <Ionicons
-//               style={{ backgroundColor: 'transparent' }}
-//               name="ios-checkmark-circle-outline"
-//               size={35}
-//               color="white"
-//             />
-//           </TouchableOpacity>,
-//           <TouchableOpacity
-//             style={[styles.rightSwipeItem, { backgroundColor: 'orchid' }]}
-//             onPress={onItemRemove}
-//           >
-//             <Ionicons
-//               style={{ backgroundColor: 'transparent' }}
-//               name="ios-close-circle-outline"
-//               size={35}
-//               color="white"
-//             />
-//           </TouchableOpacity>,
-//         ]}
-//         onRightButtonsOpenRelease={onOpen}
-//         onRightButtonsCloseRelease={onClose}
-//       >
-//         <View style={[styles.listItem]}>
-//           <Text>{item.name}</Text>
-//         </View>
-//       </Swipeable>
-//     </View>
-//   );
-// }
-
-// <Item {...itemProps} key={item.name} item={item} onItemRemove={this.onItemRemove} />
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -32,6 +32,10 @@ class RecipeScreen extends Component {
     this.setState((prevState, props) => ({ recipes: this.props.recipes }));
   }
 
+  componentDidMount() {
+    console.log(this.props.recipes);
+  }
+
   componentWillReceiveProps(nextProps) {
     //this.setState((prevState, props) => ({ recipes: nextProps.recipes }));
     // setTimeout(() => {
@@ -67,8 +71,6 @@ function RecipeCard({ recipe }) {
   const sImg = recipe.smallImageUrls[0];
   const bigImg = sImg.replace(/s90/g, 's360').replace(/https/g, 'http');
   const correctImg = bigImg.replace(/http/g, 'https');
-  // .replace(/https/g, 'http')
-  // .replace(/http/g, 'https');
   console.log(correctImg);
 
   return (
@@ -90,7 +92,6 @@ function RecipeCard({ recipe }) {
               }}
               style={{ height: 200, width: 200, flex: 1 }}
             />
-            <Text>{recipe.attributes.course[0]}</Text>
           </Left>
         </Body>
       </CardItem>
