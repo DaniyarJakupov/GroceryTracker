@@ -94,7 +94,7 @@ class SetupScreen extends Component {
                 <Text>Done</Text>
               </Button>
             ) : (
-              <Button block disabled>
+              <Button block success onPress={this.onBtnPress}>
                 <Text>Done</Text>
               </Button>
             )}

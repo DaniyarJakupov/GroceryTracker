@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Container, Header, Content, Button, Text, Title, Body } from 'native-base';
 
 class ProfileScreen extends Component {
   state = {};
 
   render() {
     return (
-      <View style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Profile </Text>
-      </View>
+      <Container>
+        <Header>
+          <Body>
+            <Title>Profile</Title>
+          </Body>
+        </Header>
+      </Container>
     );
   }
 }

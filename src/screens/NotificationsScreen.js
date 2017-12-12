@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Notification } from 'rx';
+import { View } from 'react-native';
+import { Container, Header, Content, Button, Text, Title, Body } from 'native-base';
 
 class NotificationsScreen extends Component {
   state = {};
 
   render() {
     return (
-      <View style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Notifications </Text>
-      </View>
+      <Container>
+        <Header>
+          <Body>
+            <Title>Notifications</Title>
+          </Body>
+        </Header>
+      </Container>
     );
   }
 }

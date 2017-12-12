@@ -14,6 +14,8 @@
 		"react-native-app-intro-slider": "^0.2.2",
 		"react-native-elements": "^0.18.4",
 		"react-native-linear-gradient": "^2.3.0",
+		"react-native-modal-datetime-picker": "^4.13.0",
+		"react-native-popover": "^0.2.0",
 		"react-native-svg": "^6.0.0",
 		"react-native-swipeable": "^0.6.0",
 		"react-native-textinput-effects": "^0.4.2",

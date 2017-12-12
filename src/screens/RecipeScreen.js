@@ -13,6 +13,7 @@ import {
   Icon,
   Left,
   Body,
+  Title,
 } from 'native-base';
 import { Rating } from 'react-native-elements';
 
@@ -47,7 +48,11 @@ class RecipeScreen extends Component {
     if (this.state.recipes[0]) {
       return (
         <Container>
-          <Header />
+          <Header>
+            <Body>
+              <Title>Recipes</Title>
+            </Body>
+          </Header>
           <Content>
             {this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id} />)}
           </Content>

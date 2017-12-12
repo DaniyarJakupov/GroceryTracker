@@ -11,7 +11,7 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import SelectionScreen from './src/screens/SelectionScreen';
 import RecipeScreen from './src/screens/RecipeScreen';
 import SetupScreen from './src/screens/SetupScreen';
-import ShoppingCartScreen from './src/screens/ShoppingCartScreen';
+import GroceriesScreen from './src/screens/GroceriesScreen';
 import NotificationsScreen from './src/screens/NotificationsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 
@@ -26,22 +26,16 @@ const App = () => {
 
   const Tabs = TabNavigator(
     {
+      Groceries: {
+        screen: GroceriesScreen,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor }) => <Icon name="shopping-cart" size={25} color={tintColor} />,
+        },
+      },
       Profile: {
         screen: ProfileScreen,
         navigationOptions: {
           tabBarIcon: ({ tintColor }) => <Icon name="perm-identity" size={25} color={tintColor} />,
-        },
-      },
-      Recipe: {
-        screen: RecipeScreen,
-        navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Icon name="list" size={25} color={tintColor} />,
-        },
-      },
-      ShoppingCart: {
-        screen: ShoppingCartScreen,
-        navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Icon name="shopping-cart" size={25} color={tintColor} />,
         },
       },
       Notifications: {
@@ -54,7 +48,7 @@ const App = () => {
     {
       lazy: false,
       tabBarPosition: 'bottom',
-      swipeEnabled: true,
+      swipeEnabled: false,
       animationEnabled: true,
       navigationOptions: {
         headerVisible: false,
