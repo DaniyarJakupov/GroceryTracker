@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import {
   Container,
@@ -47,6 +47,7 @@ class RecipeScreen extends Component {
     if (this.state.recipes[0]) {
       return (
         <Container>
+          <Header />
           <Content>
             {this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id} />)}
           </Content>
@@ -116,8 +117,7 @@ function RecipeCard({ recipe }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 20,
+    marginTop: 30,
   },
 });
 

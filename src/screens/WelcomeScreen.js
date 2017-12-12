@@ -56,7 +56,7 @@ const slides = [
 
 export default class WelcomeScreen extends Component {
   onDone = () => {
-    this.props.navigation.navigate('Selection');
+    this.props.navigation.navigate('Setup');
   };
 
   _renderItem = props => (

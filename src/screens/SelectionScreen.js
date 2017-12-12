@@ -9,6 +9,8 @@ import { Button } from 'react-native-elements';
 
 import { fetchRecipes } from '../redux/actions';
 
+import { colors } from '../utils/constants';
+
 class SelectionScreen extends Component {
   state = {
     currentlyOpenSwipeable: null,
@@ -152,7 +154,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: 'lightblue',
+    backgroundColor: colors.primary,
   },
   wrapper: {},
   listItem: {
