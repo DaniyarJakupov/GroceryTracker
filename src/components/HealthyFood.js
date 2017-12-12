@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Text,
-  Icon,
-  Right,
-  Left,
-  Body,
-} from 'native-base';
+import { Container, Content, Card, CardItem, Text, Icon, Right, Left } from 'native-base';
+import Popover from 'react-native-popover';
 
 export default class HealthyFood extends Component {
   state = {
@@ -27,6 +17,12 @@ export default class HealthyFood extends Component {
       { name: 'Chicken Breasts' },
       { name: 'Shrimp' },
     ],
+    isPopoverVisible: false,
+    cardRect: {},
+  };
+
+  onInfoPress = () => {
+    this.props.navigation.navigate('Pop');
   };
 
   render() {
@@ -37,7 +33,7 @@ export default class HealthyFood extends Component {
             <Card key={item.name}>
               <CardItem>
                 <Left>
-                  <TouchableOpacity onPress={() => null}>
+                  <TouchableOpacity onPress={this.onInfoPress}>
                     <Icon name="information-circle" fontSize={15} />
                   </TouchableOpacity>
                 </Left>

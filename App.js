@@ -15,6 +15,9 @@ import GroceriesScreen from './src/screens/GroceriesScreen';
 import NotificationsScreen from './src/screens/NotificationsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 
+import PopScreen from './src/components/Pop';
+import HealthyFoodScreen from './src/components/HealthyFood';
+
 import { colors } from './src/utils/constants';
 
 const Container = styled.View`
@@ -24,13 +27,33 @@ const Container = styled.View`
 const App = () => {
   const screenWidth = Dimensions.get('window').width;
 
-  const Tabs = TabNavigator(
+  const StackGroceries = StackNavigator(
     {
       Groceries: {
         screen: GroceriesScreen,
         navigationOptions: {
           tabBarIcon: ({ tintColor }) => <Icon name="shopping-cart" size={25} color={tintColor} />,
         },
+      },
+      HealthyFood: {
+        screen: HealthyFoodScreen,
+      },
+      Pop: {
+        screen: PopScreen,
+      },
+    },
+    {
+      headerMode: 'none',
+      cardStyle: {
+        backgroundColor: colors.white,
+      },
+    },
+  );
+
+  const Tabs = TabNavigator(
+    {
+      Groceries: {
+        screen: StackGroceries,
       },
       Profile: {
         screen: ProfileScreen,

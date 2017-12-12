@@ -4039,11 +4039,9 @@ react-native-modal@3.1.0:
     prop-types "15.5.10"
     react-native-animatable "^1.2.3"
 
-react-native-popover@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-popover/-/react-native-popover-0.2.0.tgz#bf66a4ce5d0583ff331edb00890380f4a1171f6f"
-  dependencies:
-    react-tween-state "0.0.5"
+"react-native-popover@https://github.com/jeanregisser/react-native-popover":
+  version "0.3.0"
+  resolved "https://github.com/jeanregisser/react-native-popover#8a443d2699b404d55c324edc8536255150340789"
 
 react-native-svg@^6.0.0:
   version "6.0.0"
@@ -4181,12 +4179,6 @@ react-transform-hmr@^1.0.4:
   dependencies:
     global "^4.3.0"
     react-proxy "^1.1.7"
-
-react-tween-state@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/react-tween-state/-/react-tween-state-0.0.5.tgz#bd25c27f2558b839a6c7aee3b85fab967760d1d2"
-  dependencies:
-    tween-functions "^1.0.1"
 
 react-tween-state@^0.1.5:
   version "0.1.5"
