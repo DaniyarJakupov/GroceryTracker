@@ -26,15 +26,7 @@ class JunkFood extends Component {
             .map(item => (
               <Card key={item.name}>
                 <CardItem style={{ backgroundColor: 'peru' }}>
-                  <Left>
-                    <TouchableOpacity>
-                      <Icon
-                        name="information-circle"
-                        fontSize={15}
-                        style={{ color: 'transparent' }}
-                      />
-                    </TouchableOpacity>
-                  </Left>
+                  <Left />
 
                   <Text style={{ color: '#fff', fontSize: 20 }}>{item.name}</Text>
 

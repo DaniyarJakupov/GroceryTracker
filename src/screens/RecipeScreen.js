@@ -62,6 +62,21 @@ class RecipeScreen extends Component {
             <Right />
           </Header>
           <Content>
+            <Card>
+              <CardItem header>
+                <Text>You are searching for recipes with these ingredients:</Text>
+              </CardItem>
+              <CardItem bordered>
+                <Body>
+                  {this.props.items.map(item => (
+                    <Text key={item.name} style={{ color: 'rebeccapurple' }}>
+                      {item.name}{' '}
+                    </Text>
+                  ))}
+                </Body>
+              </CardItem>
+            </Card>
+
             {this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id} />)}
           </Content>
         </Container>
@@ -154,6 +169,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     recipes: state.recipes,
+    items: state.items,
   };
 };
 

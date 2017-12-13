@@ -52,16 +52,16 @@ const App = () => {
       Groceries: {
         screen: StackGroceries,
       },
-      Profile: {
-        screen: ProfileScreen,
-        navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Icon name="perm-identity" size={25} color={tintColor} />,
-        },
-      },
       Notifications: {
         screen: NotificationsScreen,
         navigationOptions: {
           tabBarIcon: ({ tintColor }) => <Icon name="notifications" size={25} color={tintColor} />,
+        },
+      },
+      Profile: {
+        screen: ProfileScreen,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor }) => <Icon name="perm-identity" size={25} color={tintColor} />,
         },
       },
     },

@@ -13,9 +13,10 @@ import {
   Fab,
   Button,
 } from 'native-base';
+import Prompt from 'rn-prompt';
 import { connect } from 'react-redux';
 
-import { fetchRecipes, addItemArray } from '../redux/actions';
+import { fetchRecipes, addItemArray, addItem } from '../redux/actions';
 
 const food = [
   { name: 'Walnuts', checked: false },
@@ -35,12 +36,15 @@ class HealthyFood extends Component {
     items: [],
     selectedItems: [],
     active: false,
+    promptVisible: false,
+    promtValue: {},
   };
 
   componentDidMount() {
     console.log(this.props.items);
   }
 
+  /* Item Press */
   onItemPress(checkedItem) {
     const newItems = this.props.items.map(
       item => (item.name === checkedItem.name ? { name: item.name, checked: !item.checked } : item),
@@ -55,7 +59,8 @@ class HealthyFood extends Component {
       });
     }, 500);
   }
-
+  /* ================================================================================= */
+  /* FAB Button */
   onSearchPress = () => {
     console.log(this.state.selectedItems);
     let itemsNames = this.state.selectedItems.map(item => item.name);
@@ -66,7 +71,28 @@ class HealthyFood extends Component {
       this.props.navigation.navigate('Recipes');
     }, 1000);
   };
-
+  onAddPress = () => {
+    this.setState({ promptVisible: true });
+    setTimeout(() => {
+      //this.props.addItem(this.state.promtValue);
+    }, 100);
+  };
+  onConsumePress = () => {};
+  /* ================================================================================= */
+  /* Promt Button */
+  onPromtSubmit = value => {
+    this.setState({
+      promptVisible: false,
+      promtValue: { name: value },
+    });
+    this.props.addItem({ name: value });
+  };
+  onPromtCancel = () => {
+    this.setState({
+      promptVisible: false,
+    });
+  };
+  /* ================================================================================= */
   render() {
     return (
       <Container>
@@ -119,13 +145,22 @@ class HealthyFood extends Component {
           <Button style={{ backgroundColor: '#DD5144' }} onPress={this.onSearchPress}>
             <Icon name="search" style={{ fontSize: 25 }} />
           </Button>
-          <Button style={{ backgroundColor: '#3B5998' }}>
+          <Button style={{ backgroundColor: '#3B5998' }} onPress={this.onAddPress}>
             <Icon name="add" style={{ fontSize: 30 }} />
           </Button>
-          <Button style={{ backgroundColor: '#34A34F' }}>
+          <Button style={{ backgroundColor: '#34A34F' }} onPress={this.onConsumePress}>
             <Icon name="checkmark" style={{ fontSize: 30 }} />
           </Button>
         </Fab>
+
+        <Prompt
+          title="Add new item"
+          placeholder=""
+          defaultValue=""
+          visible={this.state.promptVisible}
+          onCancel={this.onPromtCancel}
+          onSubmit={this.onPromtSubmit}
+        />
       </Container>
     );
   }
@@ -135,4 +170,4 @@ const mapStateToProps = state => ({
   items: state.items,
 });
 
-export default connect(mapStateToProps, { fetchRecipes, addItemArray })(HealthyFood);
+export default connect(mapStateToProps, { fetchRecipes, addItemArray, addItem })(HealthyFood);
