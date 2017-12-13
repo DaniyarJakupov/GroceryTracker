@@ -15,8 +15,6 @@ import GroceriesScreen from './src/screens/GroceriesScreen';
 import NotificationsScreen from './src/screens/NotificationsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 
-import HealthyFoodScreen from './src/components/HealthyFood';
-
 import { colors } from './src/utils/constants';
 
 const Container = styled.View`

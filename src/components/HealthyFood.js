@@ -115,7 +115,7 @@ class HealthyFood extends Component {
           position="bottomRight"
           onPress={() => this.setState({ active: !this.state.active })}
         >
-          <Icon name="share" />
+          <Icon name="menu" />
           <Button style={{ backgroundColor: '#DD5144' }} onPress={this.onSearchPress}>
             <Icon name="search" style={{ fontSize: 25 }} />
           </Button>
