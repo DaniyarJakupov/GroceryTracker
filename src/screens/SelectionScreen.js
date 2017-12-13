@@ -27,7 +27,7 @@ class SelectionScreen extends Component {
     this.setState({ value: text });
   };
   onInputEnter = () => {
-    let newItem = { name: this.state.value };
+    let newItem = { name: this.state.value, checked: false };
     //this.props.addItem(newItem);
     this.setState(
       (prevState, props) => ({ items: [newItem, ...prevState.items], value: '', item: newItem }),

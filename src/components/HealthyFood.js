@@ -15,22 +15,24 @@ import {
 } from 'native-base';
 import { connect } from 'react-redux';
 
-import { fetchRecipes } from '../redux/actions';
+import { fetchRecipes, addItemArray } from '../redux/actions';
+
+const food = [
+  { name: 'Walnuts', checked: false },
+  { name: 'Salmon', checked: false },
+  { name: 'Lemons', checked: false },
+  { name: 'Broccoli', checked: false },
+  { name: 'Dark Chocolate', checked: false },
+  { name: 'Garlic', checked: false },
+  { name: 'Beans', checked: false },
+  { name: 'Eggs', checked: false },
+  { name: 'Chicken Breasts', checked: false },
+  { name: 'Shrimp', checked: false },
+];
 
 class HealthyFood extends Component {
   state = {
-    items: [
-      { name: 'Walnuts', checked: false },
-      { name: 'Salmon', checked: false },
-      { name: 'Lemons', checked: false },
-      { name: 'Broccoli', checked: false },
-      { name: 'Dark Chocolate', checked: false },
-      { name: 'Garlic', checked: false },
-      { name: 'Beans', checked: false },
-      { name: 'Eggs', checked: false },
-      { name: 'Chicken Breasts', checked: false },
-      { name: 'Shrimp', checked: false },
-    ],
+    items: [],
     selectedItems: [],
     active: false,
   };
@@ -40,15 +42,16 @@ class HealthyFood extends Component {
   }
 
   onItemPress(checkedItem) {
-    const newItems = this.state.items.map(
+    const newItems = this.props.items.map(
       item => (item.name === checkedItem.name ? { name: item.name, checked: !item.checked } : item),
     );
-    this.setState({
-      items: newItems,
-    });
+    // this.setState({
+    //   items: newItems,
+    // });
+    this.props.addItemArray(newItems);
     setTimeout(() => {
       this.setState({
-        selectedItems: this.state.items.filter(i => i.checked),
+        selectedItems: this.props.items.filter(i => i.checked),
       });
     }, 500);
   }
@@ -68,7 +71,7 @@ class HealthyFood extends Component {
     return (
       <Container>
         <Content>
-          {this.state.items.map(item => (
+          {this.props.items.map(item => (
             <Card key={item.name}>
               <CardItem style={{ backgroundColor: '#5fb660' }}>
                 <Left>
@@ -114,4 +117,4 @@ const mapStateToProps = state => ({
   items: state.items,
 });
 
-export default connect(mapStateToProps, { fetchRecipes })(HealthyFood);
+export default connect(mapStateToProps, { fetchRecipes, addItemArray })(HealthyFood);
