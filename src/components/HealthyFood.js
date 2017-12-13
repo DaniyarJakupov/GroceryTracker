@@ -106,7 +106,9 @@ class HealthyFood extends Component {
                 i.name === 'Broccoli' ||
                 i.name === 'Shrimps' ||
                 i.name === 'Lemons' ||
-                i.name === 'Dark Chocolate' ||
+                i.name === 'Dark chocolate' ||
+                i.name === 'Apples' ||
+                i.name === 'Milk' ||
                 i.name === 'Beans',
             )
             .map(item => (

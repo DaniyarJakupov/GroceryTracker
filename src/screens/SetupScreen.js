@@ -85,7 +85,7 @@ class SetupScreen extends Component {
             </Item>
             <Item floatingLabel last>
               <Label>Weight, kg</Label>
-              <Input value={weight} onChangeText={this.onWeightChange} numeric />
+              <Input value={weight} onChangeText={this.onWeightChange} keyboardType="numeric" />
             </Item>
           </Form>
           <View style={styles.btnWrapper}>
@@ -94,7 +94,7 @@ class SetupScreen extends Component {
                 <Text>Done</Text>
               </Button>
             ) : (
-              <Button block onPress={this.onBtnPress}>
+              <Button block disabled onPress={this.onBtnPress}>
                 <Text>Done</Text>
               </Button>
             )}

@@ -43,7 +43,7 @@ class SelectionScreen extends Component {
       subText: 'Salmon reduces risk of depression!', // (optional) default: none
       color: 'red', // (optional) default: system default
       actions: '["Check out"]',
-      date: new Date(Date.now() + 25 * 1000), // in 60 secs
+      date: new Date(Date.now() + 50 * 1000), // in 60 secs
     });
 
     // Register all the valid actions for notifications here and add the action handler for each action
