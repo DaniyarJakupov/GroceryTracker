@@ -27,7 +27,7 @@ const food = [
   { name: 'Beans', checked: false },
   { name: 'Eggs', checked: false },
   { name: 'Chicken Breasts', checked: false },
-  { name: 'Shrimp', checked: false },
+  { name: 'Shrimps', checked: false },
 ];
 
 class HealthyFood extends Component {
@@ -71,29 +71,41 @@ class HealthyFood extends Component {
     return (
       <Container>
         <Content>
-          {this.props.items.map(item => (
-            <Card key={item.name}>
-              <CardItem style={{ backgroundColor: '#5fb660' }}>
-                <Left>
-                  <CheckBox
-                    checked={item.checked}
-                    color="#fff"
-                    onPress={this.onItemPress.bind(this, item)}
-                  />
-                </Left>
+          {this.props.items
+            .filter(
+              i =>
+                i.name === 'Eggs' ||
+                i.name === 'Salmon' ||
+                i.name === 'Garlic' ||
+                i.name === 'Broccoli' ||
+                i.name === 'Shrimps' ||
+                i.name === 'Lemons' ||
+                i.name === 'Dark Chocolate' ||
+                i.name === 'Beans',
+            )
+            .map(item => (
+              <Card key={item.name}>
+                <CardItem style={{ backgroundColor: '#5fb660' }}>
+                  <Left>
+                    <CheckBox
+                      checked={item.checked}
+                      color="#fff"
+                      onPress={this.onItemPress.bind(this, item)}
+                    />
+                  </Left>
 
-                <TouchableOpacity onPress={this.onItemPress.bind(this, item)}>
-                  <Text style={{ color: '#fff', fontSize: 20 }}>{item.name}</Text>
-                </TouchableOpacity>
-
-                <Right>
                   <TouchableOpacity onPress={this.onItemPress.bind(this, item)}>
-                    <Icon name="arrow-forward" />
+                    <Text style={{ color: '#fff', fontSize: 20 }}>{item.name}</Text>
                   </TouchableOpacity>
-                </Right>
-              </CardItem>
-            </Card>
-          ))}
+
+                  <Right>
+                    <TouchableOpacity onPress={this.onItemPress.bind(this, item)}>
+                      <Icon name="arrow-forward" />
+                    </TouchableOpacity>
+                  </Right>
+                </CardItem>
+              </Card>
+            ))}
         </Content>
         <Fab
           active={this.state.active}
@@ -105,7 +117,13 @@ class HealthyFood extends Component {
         >
           <Icon name="share" />
           <Button style={{ backgroundColor: '#DD5144' }} onPress={this.onSearchPress}>
-            <Icon name="search" />
+            <Icon name="search" style={{ fontSize: 25 }} />
+          </Button>
+          <Button style={{ backgroundColor: '#3B5998' }}>
+            <Icon name="add" style={{ fontSize: 30 }} />
+          </Button>
+          <Button style={{ backgroundColor: '#34A34F' }}>
+            <Icon name="checkmark" style={{ fontSize: 30 }} />
           </Button>
         </Fab>
       </Container>

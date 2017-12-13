@@ -11,6 +11,7 @@ const baseUrl =
 export const fetchRecipes = item => async (dispatch) => {
   try {
     const url = `${baseUrl}${item}`;
+    console.log(url);
     const { data: { matches } } = await axios.get(url);
     // DISTPATCHING ACTION TO REDUCERS
     dispatch({

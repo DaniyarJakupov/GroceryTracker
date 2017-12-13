@@ -8,7 +8,7 @@ import { Kaede } from 'react-native-textinput-effects';
 import { Container, Header, Content, Body, Title, Button, Left, Icon, Right } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
-import { fetchRecipes, addItem, removeItem } from '../redux/actions';
+import { fetchRecipes, addItem, removeItem, addItemArray } from '../redux/actions';
 
 import { colors } from '../utils/constants';
 
@@ -27,7 +27,7 @@ class SelectionScreen extends Component {
     this.setState({ value: text });
   };
   onInputEnter = () => {
-    let newItem = { name: this.state.value, checked: false };
+    let newItem = { name: this.state.value, checked: false, expDate: 'None' };
     //this.props.addItem(newItem);
     this.setState(
       (prevState, props) => ({ items: [newItem, ...prevState.items], value: '', item: newItem }),
@@ -46,6 +46,8 @@ class SelectionScreen extends Component {
   /* Done Button */
   onBtnPress = () => {
     this.props.navigation.navigate('Groceries');
+
+    this.props.addItemArray(this.state.items);
   };
   /* ================================================================================= */
   handleScroll = () => {
@@ -60,7 +62,6 @@ class SelectionScreen extends Component {
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
   handleDatePicked = date => {
-    console.log('A date has been picked: ', date);
     this.setState({ item: { ...this.state.item, expDate: date } });
     this.hideDateTimePicker();
     setTimeout(() => {
@@ -233,4 +234,6 @@ const mapStateToProps = state => ({
   items: state.items,
 });
 
-export default connect(mapStateToProps, { fetchRecipes, addItem, removeItem })(SelectionScreen);
+export default connect(mapStateToProps, { fetchRecipes, addItem, removeItem, addItemArray })(
+  SelectionScreen,
+);
