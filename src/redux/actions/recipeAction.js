@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FETCH_RECIPE } from './types';
+import { FETCH_RECIPE, RECIPE_QUERY } from './types';
 
 const baseUrl =
   'https://api.yummly.com/v1/api/recipes?_app_id=0afd9c29&_app_key=399fb5ef83be884a1dcd5a537acc1fe7&requirePictures=true&q=';
@@ -18,9 +18,10 @@ export const fetchRecipes = item => async (dispatch) => {
       type: FETCH_RECIPE,
       payload: matches,
     });
-    // callback();
-
-    // console.log(matches);
+    dispatch({
+      type: RECIPE_QUERY,
+      payload: item,
+    });
   } catch (err) {
     console.log(err);
   }

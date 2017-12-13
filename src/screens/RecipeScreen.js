@@ -36,14 +36,9 @@ class RecipeScreen extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.recipes);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    //this.setState((prevState, props) => ({ recipes: nextProps.recipes }));
-    // setTimeout(() => {
-    //   this.state.recipes.map(recipe => console.log(recipe));
-    // }, 1000);
+    setTimeout(() => {
+      console.log('queries', this.props.queries);
+    }, 1000);
   }
 
   render() {
@@ -68,11 +63,7 @@ class RecipeScreen extends Component {
               </CardItem>
               <CardItem bordered>
                 <Body>
-                  {this.props.items.map(item => (
-                    <Text key={item.name} style={{ color: 'rebeccapurple' }}>
-                      {item.name}{' '}
-                    </Text>
-                  ))}
+                  <Text style={{ color: 'rebeccapurple' }}>{this.props.queries[0]}</Text>
                 </Body>
               </CardItem>
             </Card>
@@ -170,6 +161,7 @@ const mapStateToProps = state => {
   return {
     recipes: state.recipes,
     items: state.items,
+    queries: state.queries,
   };
 };
 
