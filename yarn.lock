@@ -4039,10 +4039,6 @@ react-native-modal@3.1.0:
     prop-types "15.5.10"
     react-native-animatable "^1.2.3"
 
-"react-native-popover@https://github.com/jeanregisser/react-native-popover":
-  version "0.3.0"
-  resolved "https://github.com/jeanregisser/react-native-popover#8a443d2699b404d55c324edc8536255150340789"
-
 react-native-svg@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-6.0.0.tgz#022d3f3d69d0c75a7b125d7e95d7618a3121606a"

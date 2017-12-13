@@ -1,29 +1,56 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Icon, Right, Left } from 'native-base';
-import Popover from 'react-native-popover';
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Text,
+  Icon,
+  Right,
+  Left,
+  CheckBox,
+  Fab,
+  Button,
+} from 'native-base';
+import { connect } from 'react-redux';
 
-export default class HealthyFood extends Component {
+import { fetchRecipes } from '../redux/actions';
+
+class HealthyFood extends Component {
   state = {
     items: [
-      { name: 'Walnuts' },
-      { name: 'Salmon' },
-      { name: 'Lemons' },
-      { name: 'Broccoli' },
-      { name: 'Dark Chocolate' },
-      { name: 'Garlic' },
-      { name: 'Beans' },
-      { name: 'Eggs' },
-      { name: 'Chicken Breasts' },
-      { name: 'Shrimp' },
+      { name: 'Walnuts', checked: false },
+      { name: 'Salmon', checked: false },
+      { name: 'Lemons', checked: false },
+      { name: 'Broccoli', checked: false },
+      { name: 'Dark Chocolate', checked: false },
+      { name: 'Garlic', checked: false },
+      { name: 'Beans', checked: false },
+      { name: 'Eggs', checked: false },
+      { name: 'Chicken Breasts', checked: false },
+      { name: 'Shrimp', checked: false },
     ],
-    isPopoverVisible: false,
-    cardRect: {},
+    selectedItems: [],
+    active: false,
   };
 
-  onInfoPress = () => {
-    this.props.navigation.navigate('Pop');
-  };
+  componentDidMount() {
+    console.log(this.props.items);
+  }
+
+  onItemPress(checkedItem) {
+    const newItems = this.state.items.map(
+      item => (item.name === checkedItem.name ? { name: item.name, checked: !item.checked } : item),
+    );
+    this.setState({
+      selectedItems: [
+        ...this.state.selectedItems,
+        { ...checkedItem, checked: !checkedItem.checked },
+      ],
+      items: newItems,
+    });
+  }
 
   render() {
     return (
@@ -31,17 +58,21 @@ export default class HealthyFood extends Component {
         <Content>
           {this.state.items.map(item => (
             <Card key={item.name}>
-              <CardItem>
+              <CardItem style={{ backgroundColor: '#5fb660' }}>
                 <Left>
-                  <TouchableOpacity onPress={this.onInfoPress}>
-                    <Icon name="information-circle" fontSize={15} />
-                  </TouchableOpacity>
+                  <CheckBox
+                    checked={item.checked}
+                    color="#fff"
+                    onPress={this.onItemPress.bind(this, item)}
+                  />
                 </Left>
 
-                <Text>{item.name}</Text>
+                <TouchableOpacity onPress={this.onItemPress.bind(this, item)}>
+                  <Text style={{ color: '#fff', fontSize: 20 }}>{item.name}</Text>
+                </TouchableOpacity>
 
                 <Right>
-                  <TouchableOpacity onPress={() => null}>
+                  <TouchableOpacity onPress={this.onItemPress.bind(this, item)}>
                     <Icon name="arrow-forward" />
                   </TouchableOpacity>
                 </Right>
@@ -49,7 +80,26 @@ export default class HealthyFood extends Component {
             </Card>
           ))}
         </Content>
+        <Fab
+          active={this.state.active}
+          direction="up"
+          containerStyle={{}}
+          style={{ backgroundColor: '#5067FF' }}
+          position="bottomRight"
+          onPress={() => this.setState({ active: !this.state.active })}
+        >
+          <Icon name="share" />
+          <Button style={{ backgroundColor: '#DD5144' }}>
+            <Icon name="search" />
+          </Button>
+        </Fab>
       </Container>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  items: state.items,
+});
+
+export default connect(mapStateToProps, { fetchRecipes })(HealthyFood);

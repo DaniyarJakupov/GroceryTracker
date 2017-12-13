@@ -15,7 +15,6 @@ import GroceriesScreen from './src/screens/GroceriesScreen';
 import NotificationsScreen from './src/screens/NotificationsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 
-import PopScreen from './src/components/Pop';
 import HealthyFoodScreen from './src/components/HealthyFood';
 
 import { colors } from './src/utils/constants';
@@ -37,9 +36,6 @@ const App = () => {
       },
       HealthyFood: {
         screen: HealthyFoodScreen,
-      },
-      Pop: {
-        screen: PopScreen,
       },
     },
     {
