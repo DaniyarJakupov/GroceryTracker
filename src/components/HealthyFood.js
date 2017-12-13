@@ -44,13 +44,25 @@ class HealthyFood extends Component {
       item => (item.name === checkedItem.name ? { name: item.name, checked: !item.checked } : item),
     );
     this.setState({
-      selectedItems: [
-        ...this.state.selectedItems,
-        { ...checkedItem, checked: !checkedItem.checked },
-      ],
       items: newItems,
     });
+    setTimeout(() => {
+      this.setState({
+        selectedItems: this.state.items.filter(i => i.checked),
+      });
+    }, 500);
   }
+
+  onSearchPress = () => {
+    console.log(this.state.selectedItems);
+    let itemsNames = this.state.selectedItems.map(item => item.name);
+    const query = itemsNames.join('+');
+    console.log(query);
+    this.props.fetchRecipes(query);
+    setTimeout(() => {
+      this.props.navigation.navigate('Recipes');
+    }, 1000);
+  };
 
   render() {
     return (
@@ -89,7 +101,7 @@ class HealthyFood extends Component {
           onPress={() => this.setState({ active: !this.state.active })}
         >
           <Icon name="share" />
-          <Button style={{ backgroundColor: '#DD5144' }}>
+          <Button style={{ backgroundColor: '#DD5144' }} onPress={this.onSearchPress}>
             <Icon name="search" />
           </Button>
         </Fab>

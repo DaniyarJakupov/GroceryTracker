@@ -19,7 +19,7 @@ class GroceriesScreen extends Component {
 
         <Tabs initialPage={0}>
           <Tab heading="Healthy food">
-            <HealthyFood />
+            <HealthyFood navigation={this.props.navigation} />
           </Tab>
           <Tab heading="Junk food">
             <JunkFood />

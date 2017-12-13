@@ -34,8 +34,11 @@ const App = () => {
           tabBarIcon: ({ tintColor }) => <Icon name="shopping-cart" size={25} color={tintColor} />,
         },
       },
-      HealthyFood: {
-        screen: HealthyFoodScreen,
+      Recipes: {
+        screen: RecipeScreen,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor }) => <Icon name="search" size={25} color={tintColor} />,
+        },
       },
     },
     {

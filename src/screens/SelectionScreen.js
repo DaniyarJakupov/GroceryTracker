@@ -45,12 +45,7 @@ class SelectionScreen extends Component {
   /* ================================================================================= */
   /* Done Button */
   onBtnPress = () => {
-    let itemsNames = this.state.items.map(item => item.name);
-    const query = itemsNames.join('+');
-    //this.props.fetchRecipes(query);
-
     this.props.navigation.navigate('Groceries');
-    console.log('redux items', this.props.items);
   };
   /* ================================================================================= */
   handleScroll = () => {

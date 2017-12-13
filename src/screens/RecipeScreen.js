@@ -12,8 +12,10 @@ import {
   Button,
   Icon,
   Left,
+  Right,
   Body,
   Title,
+  Spinner,
 } from 'native-base';
 import { Rating } from 'react-native-elements';
 
@@ -49,9 +51,15 @@ class RecipeScreen extends Component {
       return (
         <Container>
           <Header>
+            <Left>
+              <Button transparent onPress={() => this.props.navigation.goBack()}>
+                <Icon name="arrow-back" />
+              </Button>
+            </Left>
             <Body>
               <Title>Recipes</Title>
             </Body>
+            <Right />
           </Header>
           <Content>
             {this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id} />)}
@@ -59,7 +67,24 @@ class RecipeScreen extends Component {
         </Container>
       );
     }
-    return <Text>Loading</Text>;
+    return (
+      <Container>
+        <Header>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Recipes</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content>
+          <Spinner color="red" />
+        </Content>
+      </Container>
+    );
   }
 }
 
