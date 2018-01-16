@@ -101,6 +101,8 @@ class HealthyFood extends Component {
             .filter(
               i =>
                 i.name === 'Eggs' ||
+                i.name === 'Tomato' ||
+                i.name === 'Potatoes' ||
                 i.name === 'Salmon' ||
                 i.name === 'Garlic' ||
                 i.name === 'Broccoli' ||
@@ -109,6 +111,16 @@ class HealthyFood extends Component {
                 i.name === 'Dark chocolate' ||
                 i.name === 'Apples' ||
                 i.name === 'Milk' ||
+                i.name === 'Banana' ||
+                i.name === 'Grapes' ||
+                i.name === 'Oranges' ||
+                i.name === 'Kiwi' ||
+                i.name === 'Strawberries' ||
+                i.name === 'Vegetables' ||
+                i.name === 'Fruits' ||
+                i.name === 'Chicken' ||
+                i.name === 'Turkey' ||
+                i.name === 'Pork' ||
                 i.name === 'Beans',
             )
             .map(item => (

@@ -66,6 +66,11 @@ class JunkFood extends Component {
                 i.name === 'Pizza' ||
                 i.name === 'Cookies' ||
                 i.name === 'French Fries' ||
+                i.name === 'Candys' ||
+                i.name === 'Hamburgers' ||
+                i.name === 'Sausages' ||
+                i.name === 'Sugar' ||
+                i.name === 'Cake' ||
                 i.name === 'Coke',
             )
             .map(item => (
