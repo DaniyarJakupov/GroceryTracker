@@ -12,6 +12,8 @@ import {
   Item,
   Input,
   Label,
+  ListItem,
+  CheckBox,
 } from 'native-base';
 
 import { colors } from '../utils/constants';
@@ -24,6 +26,7 @@ class SetupScreen extends Component {
       age: '',
       weight: '',
       done: false,
+      vegetarian: false,
     };
   }
 
@@ -88,6 +91,19 @@ class SetupScreen extends Component {
               <Input value={weight} onChangeText={this.onWeightChange} keyboardType="numeric" />
             </Item>
           </Form>
+
+          <ListItem>
+            <Body style={{ paddingTop: 10 }}>
+              <Text style={{ fontSize: 18, color: 'rgba(0,0,0,0.65)', marginLeft: -1 }}>
+                Are you vegetarian?
+              </Text>
+            </Body>
+            <CheckBox
+              checked={this.state.vegetarian}
+              onPress={() => this.setState({ vegetarian: !this.state.vegetarian })}
+            />
+          </ListItem>
+
           <View style={styles.btnWrapper}>
             {this.state.done ? (
               <Button block success onPress={this.onBtnPress}>
@@ -115,7 +131,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 80,
   },
 });
 
