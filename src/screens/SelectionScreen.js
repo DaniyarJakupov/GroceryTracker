@@ -107,9 +107,9 @@ class SelectionScreen extends Component {
   handleDatePicked = date => {
     this.setState({ item: { ...this.state.item, expDate: date } });
     this.hideDateTimePicker();
-    setTimeout(() => {
-      this.props.addItem(this.state.item);
-    }, 1000);
+    // setTimeout(() => {
+    //   this.props.addItem(this.state.item);
+    // }, 1000);
   };
   /* ================================================================================= */
 
