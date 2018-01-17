@@ -13,7 +13,7 @@ class GroceriesScreen extends Component {
       <Container>
         <Header hasTabs>
           <Body>
-            <Title>Your groceries</Title>
+            <Title>Your unconsumed groceries</Title>
           </Body>
         </Header>
 
