@@ -16,24 +16,10 @@ import {
 import Prompt from 'rn-prompt';
 import { connect } from 'react-redux';
 
-import { fetchRecipes, addItemArray, addItem } from '../redux/actions';
-
-const food = [
-  { name: 'Walnuts', checked: false },
-  { name: 'Salmon', checked: false },
-  { name: 'Lemons', checked: false },
-  { name: 'Broccoli', checked: false },
-  { name: 'Dark Chocolate', checked: false },
-  { name: 'Garlic', checked: false },
-  { name: 'Beans', checked: false },
-  { name: 'Eggs', checked: false },
-  { name: 'Chicken Breasts', checked: false },
-  { name: 'Shrimps', checked: false },
-];
+import { fetchRecipes, addItemArray, addItem, addHealthyItem, removeItem } from '../redux/actions';
 
 class HealthyFood extends Component {
   state = {
-    items: [],
     selectedItems: [],
     active: false,
     promptVisible: false,
@@ -49,9 +35,6 @@ class HealthyFood extends Component {
     const newItems = this.props.items.map(
       item => (item.name === checkedItem.name ? { name: item.name, checked: !item.checked } : item),
     );
-    // this.setState({
-    //   items: newItems,
-    // });
     this.props.addItemArray(newItems);
     setTimeout(() => {
       this.setState({
@@ -77,7 +60,11 @@ class HealthyFood extends Component {
       //this.props.addItem(this.state.promtValue);
     }, 100);
   };
-  onConsumePress = () => {};
+  onConsumePress = () => {
+    this.state.selectedItems.map(item => this.props.removeItem(item));
+    this.props.addHealthyItem(this.state.selectedItems);
+    this.setState({ selectedItems: [] });
+  };
   /* ================================================================================= */
   /* Promt Button */
   onPromtSubmit = value => {
@@ -100,28 +87,28 @@ class HealthyFood extends Component {
           {this.props.items
             .filter(
               i =>
-                i.name === 'Eggs' ||
-                i.name === 'Tomato' ||
-                i.name === 'Potatoes' ||
-                i.name === 'Salmon' ||
-                i.name === 'Garlic' ||
-                i.name === 'Broccoli' ||
-                i.name === 'Shrimps' ||
-                i.name === 'Lemons' ||
-                i.name === 'Dark chocolate' ||
-                i.name === 'Apples' ||
-                i.name === 'Milk' ||
-                i.name === 'Banana' ||
-                i.name === 'Grapes' ||
-                i.name === 'Oranges' ||
-                i.name === 'Kiwi' ||
-                i.name === 'Strawberries' ||
-                i.name === 'Vegetables' ||
-                i.name === 'Fruits' ||
-                i.name === 'Chicken' ||
-                i.name === 'Turkey' ||
-                i.name === 'Pork' ||
-                i.name === 'Beans',
+                i.name === 'eggs' ||
+                i.name === 'tomatos' ||
+                i.name === 'potatoes' ||
+                i.name === 'salmon' ||
+                i.name === 'garlic' ||
+                i.name === 'broccoli' ||
+                i.name === 'shrimps' ||
+                i.name === 'lemons' ||
+                i.name === 'dark chocolate' ||
+                i.name === 'apples' ||
+                i.name === 'milk' ||
+                i.name === 'bananas' ||
+                i.name === 'grapes' ||
+                i.name === 'oranges' ||
+                i.name === 'kiwis' ||
+                i.name === 'strawberries' ||
+                i.name === 'vegetables' ||
+                i.name === 'fruits' ||
+                i.name === 'chicken' ||
+                i.name === 'turkey' ||
+                i.name === 'pork' ||
+                i.name === 'beans',
             )
             .map(item => (
               <Card key={item.name}>
@@ -184,4 +171,10 @@ const mapStateToProps = state => ({
   items: state.items,
 });
 
-export default connect(mapStateToProps, { fetchRecipes, addItemArray, addItem })(HealthyFood);
+export default connect(mapStateToProps, {
+  fetchRecipes,
+  addItemArray,
+  addItem,
+  addHealthyItem,
+  removeItem,
+})(HealthyFood);
