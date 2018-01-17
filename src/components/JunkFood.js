@@ -102,7 +102,7 @@ class JunkFood extends Component {
           onPress={() => this.setState({ active: !this.state.active })}
         >
           <Icon name="menu" />
-          <Button style={{ backgroundColor: '#3B5998' }} onPress={this.onAddPress}>
+          <Button style={{ backgroundColor: 'peru' }} onPress={this.onAddPress}>
             <Icon name="add" style={{ fontSize: 30 }} />
           </Button>
         </Fab>
