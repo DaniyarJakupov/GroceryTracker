@@ -12,7 +12,7 @@ import SelectionScreen from './src/screens/SelectionScreen';
 import RecipeScreen from './src/screens/RecipeScreen';
 import SetupScreen from './src/screens/SetupScreen';
 import GroceriesScreen from './src/screens/GroceriesScreen';
-import NotificationsScreen from './src/screens/NotificationsScreen';
+import ConsumptionScreen from './src/screens/ConsumptionScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 
 import { colors } from './src/utils/constants';
@@ -52,10 +52,10 @@ const App = () => {
       Groceries: {
         screen: StackGroceries,
       },
-      Notifications: {
-        screen: NotificationsScreen,
+      Consumption: {
+        screen: ConsumptionScreen,
         navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Icon name="notifications" size={25} color={tintColor} />,
+          tabBarIcon: ({ tintColor }) => <Icon name="donut-large" size={25} color={tintColor} />,
         },
       },
       Profile: {

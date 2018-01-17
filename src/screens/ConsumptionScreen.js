@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Container, Header, Content, Button, Text, Title, Body } from 'native-base';
 
-class NotificationsScreen extends Component {
+class ConsumptionScreen extends Component {
   state = {};
 
   render() {
@@ -10,7 +10,7 @@ class NotificationsScreen extends Component {
       <Container>
         <Header>
           <Body>
-            <Title>Notifications</Title>
+            <Title>Consumption</Title>
           </Body>
         </Header>
       </Container>
@@ -18,4 +18,4 @@ class NotificationsScreen extends Component {
   }
 }
 
-export default NotificationsScreen;
+export default ConsumptionScreen;
