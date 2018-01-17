@@ -9,7 +9,25 @@ const Center = styled.View`
   align-items: center;
 `;
 class ConsumptionScreen extends Component {
-  state = {};
+  state = {
+    healthyFood: 0,
+    junkFood: 0,
+  };
+
+  componentWillReceiveProps(newProps) {
+    const healthyFoodNumber = newProps.items.healthyFood.length;
+    const junkFoodNumber = newProps.items.junkFood.length;
+    if (healthyFoodNumber == 0) {
+      this.setState({ junkFood: 100 });
+    } else if (junkFoodNumber == 0) {
+      this.setState({ healthyFood: 100 });
+    } else {
+      const ratio = healthyFoodNumber / junkFoodNumber;
+      const junkFoodPortion = 100 / (ratio + 1);
+      const healthyFoodPortion = ratio * junkFoodPortion;
+      this.setState({ healthyFood: healthyFoodPortion, junkFood: junkFoodPortion });
+    }
+  }
 
   render() {
     return (
@@ -21,14 +39,26 @@ class ConsumptionScreen extends Component {
         </Header>
         <Content>
           <Center>
-            <VictoryPie
-              animate={{ duration: 2000, easing: 'bounce' }}
-              colorScale={['#5fb660', 'peru']}
-              width={370}
-              data={[{ x: 'Healthy', y: 35 }, { x: 'Junk', y: 40 }]}
-              labelRadius={60}
-              style={{ labels: { fontSize: 18, fontWeight: 'bold', fill: 'rebeccapurple' } }}
-            />
+            {this.state.healthyFood == 0 && this.state.junkFood == 0 ? (
+              <VictoryPie
+                animate={{ duration: 2000, easing: 'bounce' }}
+                width={370}
+                data={[{ x: 'No data', y: 100 }]}
+                style={{ labels: { fontSize: 18, fontWeight: 'bold', fill: 'rebeccapurple' } }}
+              />
+            ) : (
+              <VictoryPie
+                animate={{ duration: 2000, easing: 'bounce' }}
+                colorScale={['#5fb660', 'peru']}
+                width={370}
+                data={[
+                  { x: 'Healthy', y: this.state.healthyFood },
+                  { x: 'Junk', y: this.state.junkFood },
+                ]}
+                labelRadius={60}
+                style={{ labels: { fontSize: 18, fontWeight: 'bold', fill: 'rebeccapurple' } }}
+              />
+            )}
           </Center>
         </Content>
       </Container>
@@ -36,4 +66,8 @@ class ConsumptionScreen extends Component {
   }
 }
 
-export default ConsumptionScreen;
+const mapStateToProps = state => ({
+  items: state.consumed,
+});
+
+export default connect(mapStateToProps)(ConsumptionScreen);

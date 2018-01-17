@@ -86,12 +86,12 @@ const App = () => {
 
   const Root = StackNavigator(
     {
-      Welcome: {
-        screen: WelcomeScreen,
-      },
-      Setup: {
-        screen: SetupScreen,
-      },
+      // Welcome: {
+      //   screen: WelcomeScreen,
+      // },
+      // Setup: {
+      //   screen: SetupScreen,
+      // },
       Selection: {
         screen: SelectionScreen,
       },

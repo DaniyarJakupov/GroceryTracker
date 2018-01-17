@@ -56,9 +56,6 @@ class HealthyFood extends Component {
   };
   onAddPress = () => {
     this.setState({ promptVisible: true });
-    setTimeout(() => {
-      //this.props.addItem(this.state.promtValue);
-    }, 100);
   };
   onConsumePress = () => {
     this.state.selectedItems.map(item => this.props.removeItem(item));

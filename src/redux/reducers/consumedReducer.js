@@ -8,9 +8,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_HEALTHY_ITEM:
-      return { ...state, healthyFood: [...state.healthyFood, action.payload] };
+      return { ...state, healthyFood: [...state.healthyFood, ...action.payload] };
     case ADD_JUNK_ITEM:
-      return { ...state, junkFood: [...state.junkFood, action.payload] };
+      return { ...state, junkFood: [...state.junkFood, ...action.payload] };
     default:
       return state;
   }

@@ -67,7 +67,8 @@ class SelectionScreen extends Component {
 
   /* Text Input */
   onInputChange = text => {
-    this.setState({ value: text });
+    const foodItemName = text.toLowerCase();
+    this.setState({ value: foodItemName });
   };
   onInputEnter = () => {
     let newItem = { name: this.state.value, checked: false, expDate: 'None' };

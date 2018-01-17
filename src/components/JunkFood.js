@@ -11,35 +11,43 @@ import {
   Left,
   Fab,
   Button,
+  CheckBox,
 } from 'native-base';
 import Prompt from 'rn-prompt';
 import { connect } from 'react-redux';
 
-import { addItemArray, addItem } from '../redux/actions';
-
-const food = [
-  { name: 'Pizza' },
-  { name: 'Hamburgers' },
-  { name: 'Cookies' },
-  { name: 'French Fries' },
-  { name: 'Ice Cream' },
-  { name: 'Candy Bars' },
-];
+import { addItemArray, addItem, addJunkItem, removeItem } from '../redux/actions';
 
 class JunkFood extends Component {
   state = {
-    items: [],
+    selectedItems: [],
     active: false,
     promptVisible: false,
     promtValue: {},
   };
 
+  /* Item Press */
+  onItemPress(checkedItem) {
+    const newItems = this.props.items.map(
+      item => (item.name === checkedItem.name ? { name: item.name, checked: !item.checked } : item),
+    );
+    this.props.addItemArray(newItems);
+    setTimeout(() => {
+      this.setState({
+        selectedItems: this.props.items.filter(i => i.checked),
+      });
+    }, 500);
+  }
   /* ================================================================================= */
   /* FAB Button */
   onAddPress = () => {
     this.setState({ promptVisible: true });
   };
-  onConsumePress = () => {};
+  onConsumePress = () => {
+    this.state.selectedItems.map(item => this.props.removeItem(item));
+    this.props.addJunkItem(this.state.selectedItems);
+    this.setState({ selectedItems: [] });
+  };
   /* ================================================================================= */
   /* Promt Button */
   onPromtSubmit = value => {
@@ -63,26 +71,32 @@ class JunkFood extends Component {
           {this.props.items
             .filter(
               i =>
-                i.name === 'Pizza' ||
-                i.name === 'Cookies' ||
-                i.name === 'French Fries' ||
-                i.name === 'Candys' ||
-                i.name === 'Hamburgers' ||
-                i.name === 'Sausages' ||
-                i.name === 'Sugar' ||
-                i.name === 'Cake' ||
-                i.name === 'Coke',
+                i.name === 'pizza' ||
+                i.name === 'cookies' ||
+                i.name === 'french fries' ||
+                i.name === 'candys' ||
+                i.name === 'hamburgers' ||
+                i.name === 'sausages' ||
+                i.name === 'sugar' ||
+                i.name === 'cake' ||
+                i.name === 'fast food' ||
+                i.name === 'chips' ||
+                i.name === 'coke',
             )
             .map(item => (
               <Card key={item.name}>
                 <CardItem style={{ backgroundColor: 'peru' }}>
                   <Left>
-                    <TouchableOpacity>
-                      <Icon name="trash" />
-                    </TouchableOpacity>
+                    <CheckBox
+                      checked={item.checked}
+                      color="#fff"
+                      onPress={this.onItemPress.bind(this, item)}
+                    />
                   </Left>
 
-                  <Text style={{ color: '#fff', fontSize: 20 }}>{item.name}</Text>
+                  <TouchableOpacity onPress={this.onItemPress.bind(this, item)}>
+                    <Text style={{ color: '#fff', fontSize: 20 }}>{item.name}</Text>
+                  </TouchableOpacity>
 
                   <Right>
                     <TouchableOpacity>
@@ -97,13 +111,16 @@ class JunkFood extends Component {
           active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{ backgroundColor: 'peru' }}
+          style={{ backgroundColor: '#5067FF' }}
           position="bottomRight"
           onPress={() => this.setState({ active: !this.state.active })}
         >
           <Icon name="menu" />
-          <Button style={{ backgroundColor: 'peru' }} onPress={this.onAddPress}>
+          <Button style={{ backgroundColor: '#3B5998' }} onPress={this.onAddPress}>
             <Icon name="add" style={{ fontSize: 30 }} />
+          </Button>
+          <Button style={{ backgroundColor: 'peru' }} onPress={this.onConsumePress}>
+            <Icon name="checkmark" style={{ fontSize: 30 }} />
           </Button>
         </Fab>
 
@@ -124,4 +141,6 @@ const mapStateToProps = state => ({
   items: state.items,
 });
 
-export default connect(mapStateToProps, { addItemArray, addItem })(JunkFood);
+export default connect(mapStateToProps, { addItemArray, addItem, removeItem, addJunkItem })(
+  JunkFood,
+);
