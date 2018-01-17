@@ -48,7 +48,7 @@ const slides = [
   {
     key: 'somethun2',
     title: 'Enjoy the app!',
-    text: 'Visualize nutrition information of consumed products!',
+    text: 'Visualize consumption of your groceries!',
     icon: 'ios-pie-outline',
     colors: ['#29ABE2', '#4F00BC'],
   },
