@@ -12,6 +12,7 @@ import {
   Separator,
 } from 'native-base';
 import { VictoryPie } from 'victory-native';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 const Center = styled.View`
@@ -98,7 +99,7 @@ class ConsumptionScreen extends Component {
           </Body>
         </Header>
         <Content>
-          <List>
+          <ScrollView>
             <Center>{this.renderPieChart()}</Center>
 
             <Separator bordered>
@@ -130,7 +131,7 @@ class ConsumptionScreen extends Component {
                 </ListItem>
               ))
             )}
-          </List>
+          </ScrollView>
         </Content>
       </Container>
     );
