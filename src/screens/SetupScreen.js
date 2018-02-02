@@ -80,7 +80,7 @@ class SetupScreen extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Name</Label>
-              <Input value={name} onChangeText={this.onNameChange} />
+              <Input value={name} onChangeText={this.onNameChange} autoCorrect={false} />
             </Item>
             <Item floatingLabel>
               <Label>Age</Label>

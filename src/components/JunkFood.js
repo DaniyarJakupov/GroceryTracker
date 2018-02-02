@@ -74,7 +74,7 @@ class JunkFood extends Component {
                 i.name === 'pizza' ||
                 i.name === 'cookies' ||
                 i.name === 'french fries' ||
-                i.name === 'candys' ||
+                i.name === 'sweets' ||
                 i.name === 'hamburgers' ||
                 i.name === 'sausages' ||
                 i.name === 'sugar' ||
@@ -128,6 +128,7 @@ class JunkFood extends Component {
           title="Add new item"
           placeholder=""
           defaultValue=""
+          textInputProps={{ autoCapitalize: 'none', autoCorrect: false }}
           visible={this.state.promptVisible}
           onCancel={this.onPromtCancel}
           onSubmit={this.onPromtSubmit}
